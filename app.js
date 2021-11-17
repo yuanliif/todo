@@ -12,7 +12,8 @@ const routes = require('./routes')
 require('./config/mongoose')
 
 const app = express()
-
+// 這行程式碼擺放的順序需要在所有路由設定之前
+app.use(bodyParser.urlencoded({extended: true}))
 app.use(methodOverride('_method'))
 app.use(routes)
 
@@ -28,7 +29,7 @@ app.use(routes)
 app.engine('hbs', exphbs({ defaultLayout: 'main', extname: '.hbs' }))
 app.set('view engine', 'hbs')
 
-app.use(bodyParser.urlencoded({extended: true}))
+
 
 // 顯示出整份database
 // app.get('/', (req, res) => {
